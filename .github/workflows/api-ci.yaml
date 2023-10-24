@@ -33,7 +33,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODEJS_VERSION }}
-          cache: "npm"
           cache-dependency-path: ${{ env.SOURCE_PATH }}/package-lock.json
 
       - name: Update npm
