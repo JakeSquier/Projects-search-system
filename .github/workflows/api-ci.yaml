@@ -1,0 +1,52 @@
+name: "API CI"
+
+on:
+  push:
+    paths:
+      - "api/**"
+    branches:
+      - "main"
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - "api/**"
+    branches:
+      - "main"
+  workflow_dispatch:
+
+env:
+  NODEJS_VERSION: "18"
+  NPM_VERSION: "9"
+  SOURCE_PATH: "api"
+
+jobs:
+  ci:
+    name: "Continuous Integration"
+    if: github.repository_owner == 'jakesquier'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODEJS_VERSION }}
+          cache: "npm"
+          cache-dependency-path: ${{ env.SOURCE_PATH }}/package-lock.json
+
+      - name: Update npm
+        run: npm install -g npm@${{ env.NPM_VERSION }}
+
+      - name: Install node packages
+        run: npm --prefix ${{ env.SOURCE_PATH }} install
+
+      - name: Lint source
+        run: npm --prefix ${{ env.SOURCE_PATH }} run lint
+
+      - name: Build app
+        run: npm --prefix ${{ env.SOURCE_PATH }} run build
+
+      # TODO add tests and integrate them into ci workflow
+      # name: Test app
