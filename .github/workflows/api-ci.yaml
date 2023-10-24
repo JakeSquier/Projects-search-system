@@ -25,7 +25,6 @@ env:
 jobs:
   ci:
     name: "Continuous Integration"
-    if: github.repository_owner == 'jakesquier'
     runs-on: ubuntu-latest
 
     steps:
@@ -38,13 +37,16 @@ jobs:
         run: npm install -g npm@${{ env.NPM_VERSION }}
 
       - name: Install node packages
-        run: npm --prefix ${{ env.SOURCE_PATH }} install
+        working-directory: ./api
+        run: npm install
 
       - name: Lint source
-        run: npm --prefix ${{ env.SOURCE_PATH }} run lint
+        working-directory: ./api
+        run: npm run lint
 
       - name: Build app
-        run: npm --prefix ${{ env.SOURCE_PATH }} run build
+        working-directory: ./api
+        run: npm run build
 
       # TODO add tests and integrate them into ci workflow
       # name: Test app
