@@ -37,15 +37,15 @@ jobs:
         run: npm install -g npm@${{ env.NPM_VERSION }}
 
       - name: Install node packages
-        working-directory: ./api
+        working-directory: api
         run: npm install
 
       - name: Lint source
-        working-directory: ./api
+        working-directory: api
         run: npm run lint
 
       - name: Build app
-        working-directory: ./api
+        working-directory: api
         run: npm run build
 
       # TODO add tests and integrate them into ci workflow
