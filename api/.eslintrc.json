@@ -24,7 +24,7 @@
       }
     ],
     "no-var": "error",
-    "no-console": "error",
+    "no-console": "off",
     "prefer-const": [
       "error",
       {
@@ -48,7 +48,8 @@
           "constructors": "no-public"
         }
       }
-    ]
+    ],
+    "@typescript-eslint/await-thenable": "off"
   },
   "ignorePatterns": ["data/**/*", "dist/**/*"],
   "root": true

@@ -1,15 +1,25 @@
 import express, { Express, Request, Response } from 'express'
 import dotenv from 'dotenv'
+import { userDataCache } from './data/demodata/cache'
+//import { Project } from './data/demodata/types'
 
 dotenv.config()
 
-const app: Express = express()
+const router: Express = express()
 const port = process.env.PORT || 8080
+const cache = new userDataCache()
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server')
+router.get('/', (req: Request, res: Response) => {
+  cache
+    .getAllRecords()
+    .then(result => {
+      res.send(JSON.stringify(result))
+    })
+    .catch(err => {
+      res.send(err)
+    })
 })
 
-app.listen(port, () => {
+router.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
 })
