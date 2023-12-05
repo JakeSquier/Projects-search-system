@@ -1,51 +1,30 @@
-import express, { Express, Request, Response } from 'express'
+import express, { Express } from 'express'
 import dotenv from 'dotenv'
 import { userDataCache } from './data/demodata/cache'
 import { enableDataEndpoint } from './routes/data'
 import { enableSearchEndpoint } from './routes/search'
 import { enableFacetsEndpoint } from './routes/facets'
-//import { Project } from './data/demodata/types'
 
 dotenv.config()
+init()
 
-const router: Express = express()
-const port = process.env.PORT || 8080
-const cache = new userDataCache()
-
-// router.get('/', (req: Request, res: Response) => {
-//   cache
-//     .getAllRecords()
-//     .then(result => {
-//       res.send(JSON.stringify(result))
-//     })
-//     .catch(err => {
-//       res.send(err)
-//     })
-// })
-
-// router.listen(port, () => {
-//   console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
-// })
-
-init();
-
-export async function init(): Promise<void> {
+export function init(): void {
   try {
-    const router: Express = express();
-    const port = process.env.PORT || 8080;
+    const router: Express = express()
+    const port = process.env.PORT || 8080
 
     // Initialize user's git cache
-    const cache = new userDataCache();
+    const cache = new userDataCache()
 
     // Activate search endpoint
-    enableSearchEndpoint(router);
+    enableSearchEndpoint(router)
     // Activate data endpoint
-    enableDataEndpoint(router);
+    enableDataEndpoint(router)
     // Activate facets endpoint
-    enableFacetsEndpoint(router);
+    enableFacetsEndpoint(router)
 
     // Health check endpoint
-    router.use("/", (req, res, next) => {
+    router.use('/', (req, res) => {
       cache
         .getAllRecords()
         .then(result => {
@@ -54,13 +33,12 @@ export async function init(): Promise<void> {
         .catch(err => {
           res.send(err)
         })
-    });
+    })
 
     router.listen(port, () => {
       console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
     })
-
-  } catch(ex) {
+  } catch (ex) {
     console.error(ex)
   }
 }

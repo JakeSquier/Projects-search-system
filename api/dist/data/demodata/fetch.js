@@ -22,7 +22,7 @@ function fetchUserData() {
     return __awaiter(this, void 0, void 0, function* () {
         const gitUser = process.env.GIT_USER_NAME || 'JakeSquier';
         const gitApiUrl = `https://api.github.com/users/${gitUser}/repos`;
-        const unsanitizedData = yield (0, utils_1.fetchUtil)(gitApiUrl, "GET");
+        const unsanitizedData = yield (0, utils_1.fetchUtil)(gitApiUrl, 'GET');
         //@ts-ignore
         const sanitizedData = unsanitizedData.map((repo) => {
             return {

@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from 'zod'
 
 export const zSearchRequest = z.object({
-  term: z.string()
+  term: z.string(),
 })
 
-export type SearchRequest = z.infer<typeof zSearchRequest>;
+export type SearchRequest = z.infer<typeof zSearchRequest>

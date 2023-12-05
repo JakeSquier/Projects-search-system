@@ -17,22 +17,20 @@ const moize_1 = __importDefault(require("moize"));
 const cache_1 = require("../../data/demodata/cache");
 const mathjs_1 = require("mathjs");
 exports.getFacets = moize_1.default.promise(() => __awaiter(void 0, void 0, void 0, function* () {
-    const allEntries = yield (new cache_1.userDataCache()).getAllRecords();
+    const allEntries = yield new cache_1.userDataCache().getAllRecords();
     // TODO - Move this into an index definition
     const facets = {
-        "id": [],
-        "name": [],
-        "fullName": [],
-        "repoUrl": [],
-        "repoSize": [],
-        "primaryLanguage": [],
+        id: [],
+        name: [],
+        fullName: [],
+        repoUrl: [],
+        repoSize: [],
+        primaryLanguage: [],
     };
     let entry;
     for (entry of allEntries) {
         for (const [key, value] of Object.entries(entry)) {
-            if (value &&
-                facets[key] &&
-                !facets[key].includes(value)) {
+            if (value && facets[key] && !facets[key].includes(value)) {
                 console.log(value);
                 facets[key].push(value);
             }
@@ -40,5 +38,5 @@ exports.getFacets = moize_1.default.promise(() => __awaiter(void 0, void 0, void
     }
     return facets;
 }), {
-    maxAge: (0, mathjs_1.unit)(15, "minutes").toNumber("ms")
+    maxAge: (0, mathjs_1.unit)(15, 'minutes').toNumber('ms'),
 });

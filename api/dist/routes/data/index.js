@@ -13,7 +13,7 @@ exports.enableDataEndpoint = void 0;
 const types_1 = require("./types");
 const cache_1 = require("./cache");
 function enableDataEndpoint(router) {
-    router.use("/data", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    router.use('/data', (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         try {
             const dataRequestValidation = types_1.zDataRequest.safeParse(req.query);
             if (!dataRequestValidation.success) {

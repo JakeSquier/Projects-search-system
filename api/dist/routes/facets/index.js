@@ -13,7 +13,7 @@ exports.enableFacetsEndpoint = void 0;
 const types_1 = require("./types");
 const cache_1 = require("./cache");
 function enableFacetsEndpoint(router) {
-    router.use("/facets", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    router.use('/facets', (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         try {
             const facetsRequestValidation = types_1.zFacetsRequest.safeParse(req.query);
             if (!facetsRequestValidation.success) {
@@ -22,7 +22,7 @@ function enableFacetsEndpoint(router) {
                 res.send(errors);
                 return;
             }
-            const dataTag = facetsRequestValidation.data.dataTag;
+            // const dataTag = facetsRequestValidation.data.dataTag
             const facets = yield (0, cache_1.getFacets)();
             res.send(facets);
         }

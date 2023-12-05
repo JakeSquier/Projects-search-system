@@ -28,8 +28,7 @@ export class userDataCache implements UserDataInterface {
    */
   isCacheValid(): boolean {
     return (
-      this.fetchDate.getTime() + this.millisecondsToLive <
-      new Date().getTime()
+      this.fetchDate.getTime() + this.millisecondsToLive < new Date().getTime()
     )
   }
 
@@ -43,7 +42,7 @@ export class userDataCache implements UserDataInterface {
 
   getAllRecords(): Promise<Project[]> {
     if (!this.cache || this.isCacheValid()) {
-      console.log("Cache is invalid. Rehydrating")
+      console.log('Cache is invalid. Rehydrating')
       return this.fetchFunc()
         .then((data: Project[]) => {
           /** Populate cache */
@@ -59,7 +58,7 @@ export class userDataCache implements UserDataInterface {
           return []
         })
     } else {
-      console.log("Cache hit")
+      console.log('Cache hit')
       return Promise.resolve(this.cache)
     }
   }

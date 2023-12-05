@@ -17,7 +17,7 @@ const moize_1 = __importDefault(require("moize"));
 const cache_1 = require("../../data/demodata/cache");
 const mathjs_1 = require("mathjs");
 exports.fetchEntryById = moize_1.default.promise((id) => __awaiter(void 0, void 0, void 0, function* () {
-    const allEntries = yield (new cache_1.userDataCache()).getAllRecords();
+    const allEntries = yield new cache_1.userDataCache().getAllRecords();
     let entry;
     for (entry of allEntries) {
         if (entry.id.toString() === id) {
@@ -28,5 +28,5 @@ exports.fetchEntryById = moize_1.default.promise((id) => __awaiter(void 0, void 
     return null;
 }), {
     maxSize: 1000,
-    maxAge: (0, mathjs_1.unit)(15, "minutes").toNumber("ms")
+    maxAge: (0, mathjs_1.unit)(15, 'minutes').toNumber('ms'),
 });

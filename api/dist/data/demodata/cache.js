@@ -14,8 +14,7 @@ class userDataCache {
      * @returns {boolean}
      */
     isCacheValid() {
-        return (this.fetchDate.getTime() + this.millisecondsToLive <
-            new Date().getTime());
+        return (this.fetchDate.getTime() + this.millisecondsToLive < new Date().getTime());
     }
     /**
      * Invalidates the current cache,
@@ -26,7 +25,7 @@ class userDataCache {
     }
     getAllRecords() {
         if (!this.cache || this.isCacheValid()) {
-            console.log("Cache is invalid. Rehydrating");
+            console.log('Cache is invalid. Rehydrating');
             return this.fetchFunc()
                 .then((data) => {
                 /** Populate cache */
@@ -43,7 +42,7 @@ class userDataCache {
             });
         }
         else {
-            console.log("Cache hit");
+            console.log('Cache hit');
             return Promise.resolve(this.cache);
         }
     }

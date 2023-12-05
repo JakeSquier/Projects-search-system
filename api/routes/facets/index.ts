@@ -1,25 +1,25 @@
-import { Express } from "express";
-import { zFacetsRequest } from "./types";
-import { getFacets } from "./cache";
+import { Express } from 'express'
+import { zFacetsRequest } from './types'
+import { getFacets } from './cache'
 
 export function enableFacetsEndpoint(router: Express): void {
-  router.use("/facets", async (req, res, next) => {
+  router.use('/facets', async (req, res, next) => {
     try {
-      const facetsRequestValidation = zFacetsRequest.safeParse(req.query);
+      const facetsRequestValidation = zFacetsRequest.safeParse(req.query)
 
-      if(!facetsRequestValidation.success) {
-        const errors = facetsRequestValidation.error.format();
+      if (!facetsRequestValidation.success) {
+        const errors = facetsRequestValidation.error.format()
         // Throw error for incorrect params
-        res.send(errors);
-        return;
+        res.send(errors)
+        return
       }
 
-      const dataTag = facetsRequestValidation.data.dataTag;
-      const facets = await getFacets();
-      
-      res.send(facets);
+      // const dataTag = facetsRequestValidation.data.dataTag
+      const facets = await getFacets()
+
+      res.send(facets)
     } catch (ex) {
-      next(ex);
+      next(ex)
     }
   })
 }

@@ -1,5 +1,5 @@
-import { z } from "zod";
+import { z } from 'zod'
 
 export const zFacetsRequest = z.object({
-  dataTag: z.enum(["all", "git"])
+  dataTag: z.enum(['all', 'git']),
 })

@@ -12,7 +12,7 @@ export async function fetchUserData(): Promise<unknown> {
   const gitUser: string = process.env.GIT_USER_NAME || 'JakeSquier'
   const gitApiUrl: string = `https://api.github.com/users/${gitUser}/repos`
 
-  const unsanitizedData = await fetchUtil(gitApiUrl, "GET")
+  const unsanitizedData = await fetchUtil(gitApiUrl, 'GET')
 
   //@ts-ignore
   const sanitizedData: Project[] = unsanitizedData.map((repo: unknown) => {
