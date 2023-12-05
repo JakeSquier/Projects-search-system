@@ -37,16 +37,13 @@ jobs:
         run: npm install -g npm@${{ env.NPM_VERSION }}
 
       - name: Install node packages
-        working-directory: api
-        run: npm install
+        run: npm --prefix ${{ env.SOURCE_PATH }} install
 
       - name: Lint source
-        working-directory: api
-        run: npm run lint
+        run: npm --prefix ${{ env.SOURCE_PATH }} run lint
 
       - name: Build app
-        working-directory: api
-        run: npm run build
+        run: npm --prefix ${{ env.SOURCE_PATH }} run build
 
       # TODO add tests and integrate them into ci workflow
       # name: Test app
